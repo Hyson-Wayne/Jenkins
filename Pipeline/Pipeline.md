@@ -156,8 +156,11 @@ node {
     }
  
     stage('6 Approval Gate') {
-        // Add manual approval step
-        input message: 'Application ready for deployment, please review and approve'
+        // Manual approval step
+        sh "echo 'Ready for review'"
+        timeout(time: 6, unit: 'HOURS') {
+            input message: 'Application ready for deployment, please review and approve'
+        }
     }
  
     stage('7 Deploy to Prod') {
